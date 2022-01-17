@@ -2,9 +2,10 @@
   "name": "proyecto2verano",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -18,17 +19,22 @@
   },
   "homepage": "https://bitbucket.org/MespinozaSalas/proyecto2verano#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^14.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
-    "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
-    "method-override": "^3.0.0",
+    "express-validator": "^6.14.0",
+    "mssql": "^7.3.0",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "dotenv": "^14.1.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "nodemon": "^2.0.15"
   }
 }
