@@ -1,4 +1,6 @@
-import DBConnection from "../configs/DBConnection";
+const sql = require('mssql');
+const conn = require('../configs/DBConnection');
+const routePool = new sql.ConnectionPool(conn);
 import bcrypt from "bcryptjs";
 
 let handleLogin = (email, password) => {
@@ -24,16 +26,19 @@ let handleLogin = (email, password) => {
 let findUserByEmail = (email) => {
     return new Promise((resolve, reject) => {
         try {
-            DBConnection.query(
-                ' SELECT * FROM `users` WHERE `email` = ?  ', email,
-                function(err, rows) {
-                    if (err) {
-                        reject(err)
-                    }
-                    let user = rows[0];
-                    resolve(user);
-                }
-            );
+
+            routePool.connect().then(pool => {
+                return pool.request()
+                .query(`SELECT * FROM users WHERE email = '${email}'`)
+              }).then(val => {
+                routePool.close();
+
+                resolve(val.recordset[0]);
+
+              }).catch(err => {
+                reject(err);
+              });
+
         } catch (err) {
             reject(err);
         }
@@ -43,16 +48,20 @@ let findUserByEmail = (email) => {
 let findUserById = (id) => {
     return new Promise((resolve, reject) => {
         try {
-            DBConnection.query(
-                ' SELECT * FROM `users` WHERE `id` = ?  ', id,
-                function(err, rows) {
-                    if (err) {
-                        reject(err)
-                    }
-                    let user = rows[0];
-                    resolve(user);
-                }
-            );
+
+            routePool.connect().then(pool => {
+                return pool.request()
+                .query(`SELECT * FROM users WHERE id = '${id}'`)
+              }).then(val => {
+                routePool.close();
+
+                resolve(val.recordset[0]);
+
+              }).catch(err => {
+                reject(err);
+              });
+
+
         } catch (err) {
             reject(err);
         }

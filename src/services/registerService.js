@@ -1,4 +1,7 @@
-import DBConnection from "./../configs/DBConnection";
+const sql = require('mssql');
+const conn = require('../configs/DBConnection');
+
+const routePool = new sql.ConnectionPool(conn);
 import bcrypt from "bcryptjs";
 
 let createNewUser = (data) => {
@@ -17,15 +20,19 @@ let createNewUser = (data) => {
             };
 
             //create a new account
-            DBConnection.query(
-                ' INSERT INTO users set ? ', userItem,
-                function(err, rows) {
-                    if (err) {
-                        reject(false)
-                    }
+            routePool.connect().then(pool => {
+                return pool.request()
+                .query(`INSERT INTO users values(\'${userItem.fullname}\',\'${userItem.email}\',\'${userItem.password}\')`)
+              }).then(val => {
+                routePool.close();
+                if (val.rowsAffected[0] > 0) {
                     resolve("Create a new user successful");
+                }else{
+                    reject(false)
                 }
-            );
+              }).catch(err => {
+                reject(err);
+              });
         }
     });
 };
@@ -33,24 +40,28 @@ let createNewUser = (data) => {
 let checkExistEmail = (email) => {
     return new Promise( (resolve, reject) => {
         try {
-            DBConnection.query(
-                ' SELECT * FROM `users` WHERE `email` = ?  ', email,
-                function(err, rows) {
-                    if (err) {
-                        reject(err)
-                    }
-                    if (rows.length > 0) {
-                        resolve(true)
-                    } else {
-                        resolve(false)
-                    }
+            routePool.connect().then(pool => {
+                return pool.request()
+                .query(`SELECT * FROM users WHERE email = '${email}'`)
+              }).then(val => {
+                routePool.close();
+                if (val.recordset.length === 0) {
+                    resolve(false)
+                }else if (val.recordset.length !== 0){
+                    resolve(true)
+                }else{
+                    resolve(false)
                 }
-            );
+              }).catch(err => {
+                reject(err);
+              });
         } catch (err) {
             reject(err);
         }
     });
 };
+
+
 module.exports = {
     createNewUser: createNewUser
 };

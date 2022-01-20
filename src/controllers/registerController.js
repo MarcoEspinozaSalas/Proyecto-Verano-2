@@ -3,7 +3,8 @@ import { validationResult } from "express-validator";
 
 let getPageRegister = (req, res) => {
     return res.render("register.ejs", {
-        errors: req.flash("errors")
+        errors: req.flash("errors"),
+        results: req.flash("results")
     });
 };
 
@@ -28,6 +29,7 @@ let createNewUser = async (req, res) => {
     };
     try {
         await registerService.createNewUser(newUser);
+        req.flash("results", "Create a new user successful");
         return res.redirect("/login");
     } catch (err) {
         req.flash("errors", err);
