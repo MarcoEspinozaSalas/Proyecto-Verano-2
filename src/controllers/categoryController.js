@@ -1,16 +1,18 @@
-import registerService from "./../services/registerService";
+import categoryService from "./../services/categoryService";
 import { validationResult } from "express-validator";
 
-let getPageRegister = (req, res) => {
-    return res.render("register.ejs", {
+let getPageCategory = (req, res) => {
+    return res.render("category.ejs", {
         errors: req.flash("errors"),
         results: req.flash("results"),
+        user: req.user,
         categoriasName: '',
         categoriasID: ''
+    
     });
 };
 
-let createNewUser = async (req, res) => {
+let createNewCategory = async (req, res) => {
     //validate required fields
     let errorsArr = [];
     let validationErrors = validationResult(req);
@@ -20,25 +22,25 @@ let createNewUser = async (req, res) => {
             errorsArr.push(item.msg);
         });
         req.flash("errors", errorsArr);
-        return res.redirect("/register");
+        return res.redirect("/category");
     }
 
     //create a new user
-    let newUser = {
-        fullname: req.body.fullName,
-        email: req.body.email,
-        password: req.body.password
+    let newCategory = {
+        nameCategory: req.body.nameCategory
     };
     try {
-        await registerService.createNewUser(newUser);
-        req.flash("results", "Create a new user successful");
-        return res.redirect("/login");
+        await categoryService.creatNewCategory(newCategory);
+        req.flash("results", "Create a new Category successful");
+        return res.redirect("/category");
     } catch (err) {
         req.flash("errors", err);
-        return res.redirect("/register");
+        return res.redirect("/category");
     }
 };
+
 module.exports = {
-    getPageRegister: getPageRegister,
-    createNewUser: createNewUser
+    getPageCategory: getPageCategory,
+    createNewCategory: createNewCategory,
+    
 };

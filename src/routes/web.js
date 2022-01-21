@@ -6,6 +6,8 @@ import testPageController from "../controllers/testPageController";
 import auth from "../validation/authValidation";
 import passport from "passport";
 import initPassportLocal from "../controllers/passportLocalController";
+import categoryController from "../controllers/categoryController";
+import functionsController from "../controllers/functionsController";
 
 // Init all passport
 initPassportLocal();
@@ -31,9 +33,15 @@ let initWebRoutes = (app) => {
     router.post("/register", auth.validateRegister, registerController.createNewUser);
 
 
-    //Test
-    router.get("/test", loginController.checkLoggedIn, testPageController.handleHelloWorld);
-
+    //category
+    router.get("/category", loginController.checkLoggedIn, categoryController.getPageCategory);
+    //router.get("/getCategories", loginController.checkLoggedIn, categoryController.extractCategories);
+    router.post("/category", loginController.checkLoggedIn,categoryController.createNewCategory);
+    
+    //Functions
+    router.get("/functions", loginController.checkLoggedIn, functionsController.getPageFunctions);
+   // router.get("/functions2", loginController.checkLoggedIn, functionsController.extractCategories);
+    router.post("/functions", loginController.checkLoggedIn,functionsController.createNewFunction);
 
 
     return app.use("/", router);

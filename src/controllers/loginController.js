@@ -4,7 +4,9 @@ import loginService from "../services/loginService";
 let getPageLogin = (req, res) => {
     return res.render("login.ejs", {
         errors: req.flash("errors"),
-        results: req.flash("results")
+        results: req.flash("results"),
+        categoriasName: '',
+        categoriasID: ''
     });
 };
 

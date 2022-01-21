@@ -12,6 +12,20 @@ create table users
 GO
 
 
+CREATE TABLE category (
+    idCategory int IDENTITY(1,1) primary key ,
+	nameCategory varchar(20) not null
+);
+go
+CREATE TABLE functions(
+	idFunction int IDENTITY(1,1) primary key,
+	name varchar(100) not null,
+	description varchar(200) not null,
+	code varchar(2000) not null,
+	idUser int FOREIGN KEY REFERENCES users(id),
+	idCategory int FOREIGN KEY REFERENCES category(idCategory)
+);
+go
 select * from users
 
 SELECT * FROM users WHERE email = 'test@test'
