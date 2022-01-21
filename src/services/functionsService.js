@@ -10,7 +10,6 @@ let creatNewFunction = (data) =>{
         if (!codeIsOk) {
             reject(`This function has erros in the code. Please rewrite it.`);
         } else {
-            console.log(newName);
             let functions = {
                 name: newName,
                 description: data.description,
@@ -40,7 +39,6 @@ let creatNewFunction = (data) =>{
 let checkfunctionName = (name) => {
     return new Promise((resolve, reject)=>{
         try {
-            console.log(eval(`(${name}).name`));
             if(eval(`(${name}).name`).length === 0){
                 let numero = Math.random() * (1000 - 1) + 1;
                 let nameFunction = 'Funcion';
@@ -62,7 +60,6 @@ let checkfunctionCode= (code) => {
             resolve(true);
            
         } catch (error) {
-            console.log("hola en el catch");
             resolve(false);
         }
     });

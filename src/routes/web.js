@@ -2,12 +2,12 @@ import express from "express";
 import homePageController from "../controllers/homePageController";
 import registerController from "../controllers/registerController";
 import loginController from "../controllers/loginController";
-import testPageController from "../controllers/testPageController";
 import auth from "../validation/authValidation";
 import passport from "passport";
 import initPassportLocal from "../controllers/passportLocalController";
 import categoryController from "../controllers/categoryController";
 import functionsController from "../controllers/functionsController";
+import searchFunctionController from "../controllers/searchFunctionsController"
 
 // Init all passport
 initPassportLocal();
@@ -42,6 +42,9 @@ let initWebRoutes = (app) => {
     router.get("/functions", loginController.checkLoggedIn, functionsController.getPageFunctions);
    // router.get("/functions2", loginController.checkLoggedIn, functionsController.extractCategories);
     router.post("/functions", loginController.checkLoggedIn,functionsController.createNewFunction);
+
+    router.get("/searchFunctions", loginController.checkLoggedIn, searchFunctionController.getPageSearchFunctions)
+
 
 
     return app.use("/", router);

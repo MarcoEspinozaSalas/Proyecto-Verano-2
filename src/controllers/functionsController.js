@@ -12,7 +12,6 @@ let getPageFunctions = (req, res) =>{
                 user : req.user,
                 categoriasName: val1,
                 categoriasID: val2
-
             });
         })
        
@@ -33,7 +32,6 @@ let createNewFunction = async (req, res) => {
         req.flash("errors", errorsArr);
         return res.redirect("/functions");
     }
-    console.log("hola numero 5");
 
     //create a new user
     let newFunction = {
@@ -52,6 +50,8 @@ let createNewFunction = async (req, res) => {
         return res.redirect("/functions");
     }
 };
+
+
 let extractCategories = async (req, res) => {
     try {
        let a =  await categoryService.extractCategories();

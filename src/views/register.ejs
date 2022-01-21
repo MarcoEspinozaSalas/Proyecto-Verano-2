@@ -9,38 +9,32 @@
     </head>
     <body>
         <div class="container" id="container">
-                        <form method="POST" action="/register">
-                            <h1>SignUp</h1>
-                               
-                                <input type="text" class="form-control" name="fullName" id="fullName" placeholder="Full name">
-                           
-                            
-                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required>
-                           
-                                
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-                           
-                                <input type="password" class="form-control" name="passwordConfirmation" id="passwordConfirmation" placeholder="Password Confirmation" required>
-                            
-                            <button type="submit" class="btn btn-primary">Register</button>
-                            <br>
-                            <div>
-                                If you already have had an account.
-                                <a href="/login">Log in</a>.
-                            </div>
-                            <div>
-                                Return to
-                                <a href="/">Home Page</a>
-                            </div>
-                            <br><br>
-                        </form>
+            <form method="POST" action="/register">
+                <h1>SignUp</h1>
 
-                        
-                       
-                   
-              
+                <input type="text" class="form-control" name="fullName" id="fullName" placeholder="Full name">
+
+
+                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required>
+
+
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+
+                <input type="password" class="form-control" name="passwordConfirmation" id="passwordConfirmation" placeholder="Password Confirmation" required>
+
+                <button type="submit" class="btn btn-primary">Register</button>
+                <br>
+                <div>
+                    If you already have had an account.
+                    <a href="/login">Log in</a>.
+                </div>
+                <br><br>
+            </form>
+
+
         </div>
-
+        <br>
+        <br>
         <div>
             <% if(errors != "") { %>
                 <% errors.forEach((item) => { %>
