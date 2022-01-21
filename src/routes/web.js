@@ -43,8 +43,9 @@ let initWebRoutes = (app) => {
    // router.get("/functions2", loginController.checkLoggedIn, functionsController.extractCategories);
     router.post("/functions", loginController.checkLoggedIn,functionsController.createNewFunction);
 
-    router.get("/searchFunctions", loginController.checkLoggedIn, searchFunctionController.getPageSearchFunctions)
+    router.get("/searchFunctions", loginController.checkLoggedIn, searchFunctionController.getPageSearchFunctions);
 
+    router.get("/getFunctions", loginController.checkLoggedIn);
 
 
     return app.use("/", router);
