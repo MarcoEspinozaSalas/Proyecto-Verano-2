@@ -45,7 +45,7 @@ let initWebRoutes = (app) => {
 
     router.get("/searchFunctions", loginController.checkLoggedIn, searchFunctionController.getPageSearchFunctions);
 
-    router.get("/getFunctions", loginController.checkLoggedIn);
+    router.get("/getFunctions", loginController.checkLoggedIn, searchFunctionController.extractFunctionsUsers);
 
 
     return app.use("/", router);

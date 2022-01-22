@@ -1,62 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Functions</title>
-    <link rel="stylesheet" href="/css/register.css">
-</head>
-<body>
-    <div class="container" id="container">
-        <div class="form-container sign-in-container">
-            <form method="POST" action="/functions">
-                <h1>Crear Funcion</h1>
-                <br>
-                <br>
-                <input type="text" id="description" name="description" placeholder="Descripcion" required>
-                <textarea id="code" name="code" rows="4" cols="50"></textarea>
-                        <br>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Functions</title>
+        <link rel="stylesheet" href="/css/register.css">
+    </head>
+    <body>
+        <div class="container" id="container">
+            <div class="form-container sign-in-container">
+                <form method="POST" action="/functions">
+                    <h1>Crear Funcion</h1>
+                    <br>
+                    <br>
+                    <input type="text" id="description" name="description" placeholder="Descripcion" required>
+                    <textarea id="code" name="code" rows="4" cols="50"></textarea>
+                    <br>
                     <input type="text" class="form-control" name="idUser" id="idUser" value="<%= user.id%>" hidden>
                     <label for="idCategory">Choose a category:</label>
                     <select name="idCategory" id="idCategory">
-                      
-                      <% if(categoriasName.length != 0 ) { %>
-                        <% for (let x = 0; x < categoriasName.length; x++) { %>
-                            <option value="<%- categoriasID[x]%>"><%- categoriasName[x] %></option>
+
+                        <% if(categoriasName.length != 0 ) { %>
+                            <% for (let x = 0; x < categoriasName.length; x++) { %>
+                                <option hidden>Categories...</option>
+                                <option value="<%- categoriasID[x]%>"><%- categoriasName[x] %></option>
+                            <% } %>
                         <% } %>
-                    <% } %>
                     </select>
                     <br><br>
-                <br>
+                    <br>
 
-                <button type="submit">Crear nueva funcion</button>
-               
-                <br>
-                <a href="/">Home Page</a>
-            </form>
-            
+                    <button type="submit">Crear nueva funcion</button>
 
+                    <br>
+                    <a href="/">Home Page</a>
+                </form>
+
+
+            </div>
         </div>
-    </div>
-    <br><br>
-    <div>
-        <% if(errors != "") { %>
-            <% errors.forEach((item) => { %>
-                <div class="alert alert-danger">
-                    <%- item %>
-                </div>
-            <% }); %>
-        <% } %>
-    </div>
-    <div>
-        <% if(results != "") { %>
-            <% results.forEach((item) => { %>
-                <div class="alert alert-success">
-                    <%- item %>
-                </div>
-            <% }); %>
-        <% } %>
-    </div>
-</body>
+        <br><br>
+        <div>
+            <% if(errors != "") { %>
+                <% errors.forEach((item) => { %>
+                    <div class="alert alert-danger">
+                        <%- item %>
+                    </div>
+                <% }); %>
+            <% } %>
+        </div>
+        <div>
+            <% if(results != "") { %>
+                <% results.forEach((item) => { %>
+                    <div class="alert alert-success">
+                        <%- item %>
+                    </div>
+                <% }); %>
+            <% } %>
+        </div>
+    </body>
 </html>

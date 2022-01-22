@@ -64,6 +64,12 @@ let checkfunctionCode= (code) => {
         }
     });
 };
+
+
+
+
+
+
 module.exports = {
     creatNewFunction : creatNewFunction
 }

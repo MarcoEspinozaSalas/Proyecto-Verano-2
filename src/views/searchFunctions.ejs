@@ -8,32 +8,49 @@
         <link rel="stylesheet" href="/css/register.css">
     </head>
     <body>
-
-
         <div class="container" id="container">
             <div class="form-container sign-in-container">
                 <form method="POST" action="/getFunctions">
                     <h1>Buscar Funciones</h1>
-                    <br>    
+                    <br>
                     <br>
                     <div style="gap: 10px; display: flex;">
-                        <label for="option">Nombre Usuario</label>    
-                        <input type="radio" id="option" name="option" value="nombreUsuario"> 
-                        <label for="option">Nombre Funcion</label>    
-                        <input type="radio" id="option" name="option" value="nombreFuncion">
-                        <label for="option">Categoría</label>    
-                        <input type="radio" id="option" name="option" value="categoria">
+                        <label for="option">Nombre Usuario</label>
+                        <input type="radio" id="nameUser" name="option" value="nombreUsuario">
+                        <label for="option">Nombre Funcion</label>
+                        <input type="radio" id="nameFunc" name="option" value="nombreFuncion">
+                        <label for="option">Categoría</label>
+                        <input type="radio" id="category" name="option" value="categoria">
                     </div>
-                    <input type="text">
-                    <select name="cars" id="cars">
+                    <br>
+                    <br>
+                    <div id="divNames" style="display:none;">
+                        <label for="names">
+                            Lista de usuarios</label>
+                        <select name="names" id="names" onchange="getSelectNames(this)">
+                            <% if(users.length != 0 ) { %>
+                                <% for (let x = 0; x < users.length; x++) { %>
+                                    <option hidden>users...</option>
+                                    <option value="<%- users[x].id%>"><%- users[x].fullname %></option>
+                                <% } %>
+                            <% } %>
+                            <% var test = this.value %>
+                        </select>
 
-                    </select>
-                    <button type="submit">Buscar</button>
+
+                    </div>
+
+                    <br>
+
+                    <div id="divFunctions" style="display:none;"></div>
+
+                    <br>
+
+                    <button type="submit">
+                        Buscar</button>
                     <br>
                     <a href="/">Home Page</a>
                 </form>
-
-
             </div>
         </div>
         <br><br>
@@ -55,7 +72,37 @@
                 <% }); %>
             <% } %>
         </div>
-
-
     </body>
-</html>
+    <script>
+        // Filtrar por nombre
+        selectNames = document.getElementById("nameUser");
+        selectNames.onclick = function () {
+            divNames = document.getElementById("divNames");
+            divNames.style = "display: "
+        };
+
+        function getSelectNames(selectObject) {
+            divFunctions = document.getElementById("divFunctions");
+            divFunctions.innerHTML = '';
+            var valueID = selectObject.value;
+            divFunctions.style = "display: "
+
+            selectFunctions = document.getElementById("functions");
+
+            let codigoHTMLFunctions = `
+                <label for="functions">Lista de Funciones</label>
+                <select name="functions" id="functions">
+                    <% if(functions.length != 0 ) { %>
+                        <% for (let x = 0; x < functions.length; x++) { %>
+                            <% if(functions[x].idUser === test) { %>
+                                <option hidden>functios...</option> 
+                                <option value="<%- functions[x].idFunction%>"><%- functions[x].description %></option>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                </select>
+                `
+            divFunctions.innerHTML += codigoHTMLFunctions;
+        }
+    </script>
+</html></html></html>
