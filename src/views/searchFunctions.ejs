@@ -10,7 +10,7 @@
     <body>
         <div class="container" id="container">
             <div class="form-container sign-in-container">
-                <form method="POST" action="/getFunctions">
+                <form method="GET" action="/showCode">
                     <h1>Buscar Funciones</h1>
                     <br>
                     <br>
@@ -34,10 +34,7 @@
                                     <option value="<%- users[x].id%>"><%- users[x].fullname %></option>
                                 <% } %>
                             <% } %>
-                            <% var test = this.value %>
                         </select>
-
-
                     </div>
 
                     <br>
@@ -46,8 +43,7 @@
 
                     <br>
 
-                    <button type="submit">
-                        Buscar</button>
+                    <button type="submit">Buscar</button>
                     <br>
                     <a href="/">Home Page</a>
                 </form>
@@ -87,22 +83,26 @@
             var valueID = selectObject.value;
             divFunctions.style = "display: "
 
-            selectFunctions = document.getElementById("functions");
-
             let codigoHTMLFunctions = `
                 <label for="functions">Lista de Funciones</label>
                 <select name="functions" id="functions">
                     <% if(functions.length != 0 ) { %>
                         <% for (let x = 0; x < functions.length; x++) { %>
-                            <% if(functions[x].idUser === test) { %>
-                                <option hidden>functios...</option> 
-                                <option value="<%- functions[x].idFunction%>"><%- functions[x].description %></option>
-                            <% } %>
+                            <option hidden>functios...</option>
+                            <option id="<%- functions[x].idUser%>"  class="optionFunc" value='<%- functions[x].code %>'><%- functions[x].description %></option>
                         <% } %>
                     <% } %>
                 </select>
                 `
             divFunctions.innerHTML += codigoHTMLFunctions;
+
+            var element = document.getElementsByClassName("optionFunc");
+
+            for (let index = 0; index < element.length; index++) {
+                if (element[index].id !== valueID) {
+                    element[index].style = "display: none";
+                }
+            }
         }
     </script>
-</html></html></html>
+</html>

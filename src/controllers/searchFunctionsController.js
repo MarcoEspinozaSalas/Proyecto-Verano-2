@@ -43,7 +43,6 @@ let extractFunctionsUsers= async (req, res) => {
 };
 
 
-
 module.exports = {
     getPageSearchFunctions : getPageSearchFunctions,
     extractFunctionsUsers : extractFunctionsUsers

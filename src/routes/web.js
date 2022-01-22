@@ -8,6 +8,7 @@ import initPassportLocal from "../controllers/passportLocalController";
 import categoryController from "../controllers/categoryController";
 import functionsController from "../controllers/functionsController";
 import searchFunctionController from "../controllers/searchFunctionsController"
+const axios = require('axios');
 
 // Init all passport
 initPassportLocal();
@@ -45,10 +46,23 @@ let initWebRoutes = (app) => {
 
     router.get("/searchFunctions", loginController.checkLoggedIn, searchFunctionController.getPageSearchFunctions);
 
-    router.get("/getFunctions", loginController.checkLoggedIn, searchFunctionController.extractFunctionsUsers);
+    //router.get("/getFunctions", loginController.checkLoggedIn, searchFunctionController.extractFunctionsUsers);
 
+    //router.post("/sentID", loginController.checkLoggedIn, searchFunctionController.catchID)
+
+    router.get("/showCode", function (req, res, next) {
+
+        axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions } })
+        .then((result) => {
+            return res.render("showCode.ejs", {
+                code: result.data
+            });
+            
+        }).catch((err) => {
+            console.log(err);
+        });
+    })
 
     return app.use("/", router);
-
 };
 module.exports = initWebRoutes;
