@@ -40,8 +40,24 @@
                     <br>
 
                     <div id="divFunctions" style="display:none;"></div>
+                    <div id="divFunctionsName" style="display:none;"></div>
+                    <div id="divFunctionsCategory" style="display:none;">
+                        <select name="idCategory" id="idCategory" onchange="getSelectCategories(this)">
+                            <% if(categoriesName.length != 0 ) { %>
+                                <% for (let x = 0; x < categoriesName.length; x++) { %>
+                                    <option hidden>Categories...</option>
+                                    <option value="<%- categoriesID[x]%>"><%- categoriesName[x] %></option>
+                                <% } %>
+                            <% } %>
+                        </select>
+                    </div>
 
                     <br>
+
+                    <div id="divFunctionsCategory2" style="display:none;"></div>
+
+                    <br>
+
 
                     <button type="submit">Buscar</button>
                     <br>
@@ -75,6 +91,12 @@
         selectNames.onclick = function () {
             divNames = document.getElementById("divNames");
             divNames.style = "display: "
+            divFunctionsName = document.getElementById("divFunctionsName");
+            divFunctionsName.style = "display: none"
+            divFunctionsCategory = document.getElementById("divFunctionsCategory");
+            divFunctionsCategory.style = "display: none"
+            divFunctionsCategory2 = document.getElementById("divFunctionsCategory2");
+            divFunctionsCategory2.style = "display: none"
         };
 
         function getSelectNames(selectObject) {
@@ -103,6 +125,81 @@
                     element[index].style = "display: none";
                 }
             }
+        }
+
+        // Filtrar por nombre
+        selectFunct = document.getElementById("nameFunc");
+        selectFunct.onclick = function () {
+            divFunctionsCategory = document.getElementById("divFunctionsCategory");
+            divFunctionsCategory.style = "display: none"
+            divFunctionsCategory2 = document.getElementById("divFunctionsCategory2");
+            divFunctionsCategory2.style = "display: none"
+            divNames = document.getElementById("divNames");
+            divNames.style = "display: none"
+            divFunctions = document.getElementById("divFunctions");
+            divFunctions.style = "display: none"
+            divFunctionsName = document.getElementById("divFunctionsName");
+            divFunctionsName.style = "display: "
+
+            divFunctionsName = document.getElementById("divFunctionsName");
+            divFunctionsName.innerHTML = '';
+            divFunctionsName.style = "display: "
+
+            let codigoHTMLFunctions = `
+                <label for="functions">Lista de Funciones</label>
+                <select name="functions2" id="functions2">
+                    <% if(functions.length != 0 ) { %>
+                        <% for (let x = 0; x < functions.length; x++) { %>
+                            <option hidden>functios...</option>
+                            <option id="<%- functions[x].idUser%>"  class="optionFunc" value='<%- functions[x].code %>'><%- functions[x].description %></option>
+                        <% } %>
+                    <% } %>
+                </select>
+                `
+            divFunctionsName.innerHTML += codigoHTMLFunctions;
+        };
+
+
+        // Filtrar por category
+        selectCategory = document.getElementById("category");
+        selectCategory.onclick = function () {
+            divNames = document.getElementById("divNames");
+            divNames.style = "display: none"
+            divFunctions = document.getElementById("divFunctions");
+            divFunctions.style = "display: none"
+            divFunctionsName = document.getElementById("divFunctionsName");
+            divFunctionsName.style = "display: none"
+            divFunctionsCategory = document.getElementById("divFunctionsCategory");
+            divFunctionsCategory.style = "display: "
+        };
+
+        function getSelectCategories(selectObject) {
+            divFunctionsCategory2 = document.getElementById("divFunctionsCategory2");
+            divFunctionsCategory2.innerHTML = '';
+            var valueID = selectObject.value;
+            divFunctionsCategory2.style = "display: "
+
+            let codigoHTMLFunctions = `
+                <label for="functions">Lista de Funciones</label>
+                <select name="functions3" id="functions3">
+                    <% if(functions.length != 0 ) { %>
+                        <% for (let x = 0; x < functions.length; x++) { %>
+                            <option hidden>functios...</option>
+                            <option id="<%- functions[x].idCategory%>"  class="optionFuncCategory" value='<%- functions[x].code %>'><%- functions[x].description %></option>
+                        <% } %>
+                    <% } %>
+                </select>
+                `
+            divFunctionsCategory2.innerHTML += codigoHTMLFunctions;
+
+            var element = document.getElementsByClassName("optionFuncCategory");
+
+            for (let index = 0; index < element.length; index++) {
+                if (element[index].id !== valueID) {
+                    element[index].style = "display: none";
+                }
+            }
+
         }
     </script>
 </html>

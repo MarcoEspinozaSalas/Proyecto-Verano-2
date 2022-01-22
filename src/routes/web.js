@@ -52,15 +52,38 @@ let initWebRoutes = (app) => {
 
     router.get("/showCode", function (req, res, next) {
 
-        axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions } })
-        .then((result) => {
-            return res.render("showCode.ejs", {
-                code: result.data
+        if (req.query.functions != undefined && req.query.functions != 'functios...') {
+            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions } })
+            .then((result) => {
+                return res.render("showCode.ejs", {
+                    code: result.data
+                });
+                
+            }).catch((err) => {
+                console.log(err);
             });
-            
-        }).catch((err) => {
-            console.log(err);
-        });
+        }else if (req.query.functions2 != undefined && req.query.functions2 != 'functios...') {
+            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions2 } })
+            .then((result) => {
+                return res.render("showCode.ejs", {
+                    code: result.data
+                });
+                
+            }).catch((err) => {
+                console.log(err);
+            });
+        }else if (req.query.functions3 != undefined && req.query.functions3 != 'functios...') {
+            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions3 } })
+            .then((result) => {
+                return res.render("showCode.ejs", {
+                    code: result.data
+                });
+                
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+        
     })
 
     return app.use("/", router);
