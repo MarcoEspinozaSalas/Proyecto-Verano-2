@@ -27,6 +27,28 @@ let getUsers = () =>{
     });
 };
 
+let getfunctionsUsersByID = (idFunction) =>{
+    return new Promise( async(resolve, reject)=>{
+        routePool.connect().then(pool =>{
+            return pool.request()
+            .query(`SELECT * FROM functions WHERE idFunction = ${idFunction}`)
+        }).then(val =>{
+            routePool.close();
+            
+            let listaFunctions = [];
+            for (const x in val.recordset) {
+               listaFunctions.push(val.recordset[x])
+            }
+            
+            resolve(listaFunctions)
+
+
+        }).catch(err =>{
+            reject(err);
+        });
+
+    });
+};
 
 let getfunctionsUsers = () =>{
     return new Promise( async(resolve, reject)=>{
@@ -53,5 +75,6 @@ let getfunctionsUsers = () =>{
 
 module.exports = {
     getUsers : getUsers,
-    getfunctionsUsers: getfunctionsUsers
+    getfunctionsUsers: getfunctionsUsers,
+    getfunctionsUsersByID: getfunctionsUsersByID
 }

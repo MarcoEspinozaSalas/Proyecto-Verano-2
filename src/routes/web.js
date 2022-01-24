@@ -43,8 +43,14 @@ let initWebRoutes = (app) => {
     //Functions
     router.get("/functions", loginController.checkLoggedIn, functionsController.getPageFunctions);
     router.get("/exportFunctions", function (req, res, next) {
-        searchFunctionsService.getfunctionsUsers().then((result) => {
-            return res.status(200).json(result);
+        searchFunctionsService.getfunctionsUsersByID(req.query.idFunction).then((result) => {
+            if (result.length != 0) {
+                (result[0].code) = (result[0].code).replace(/&#39;/g, '\'').replace(/&#34;/g, '"');
+                return res.status(200).json(result);
+            }else{
+                return res.status(200).json({message: `No se encontró la función con el id: ${req.query.idFunction}`});
+            }
+
         }).catch((err) => {
             return next(err);
         });;
@@ -52,10 +58,6 @@ let initWebRoutes = (app) => {
     router.post("/functions");
 
     router.get("/searchFunctions", loginController.checkLoggedIn, searchFunctionController.getPageSearchFunctions);
-
-    //router.get("/getFunctions", loginController.checkLoggedIn, searchFunctionController.extractFunctionsUsers);
-
-    //router.post("/sentID", loginController.checkLoggedIn, searchFunctionController.catchID)
 
     router.get("/showCode", function (req, res, next) {
 
