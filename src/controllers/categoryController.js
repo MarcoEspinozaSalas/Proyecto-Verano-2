@@ -1,6 +1,7 @@
+//Imports
 import categoryService from "./../services/categoryService";
 import { validationResult } from "express-validator";
-
+//Render page with variables
 let getPageCategory = (req, res) => {
     return res.render("category.ejs", {
         errors: req.flash("errors"),
@@ -11,7 +12,7 @@ let getPageCategory = (req, res) => {
     
     });
 };
-
+//Crear categoria
 let createNewCategory = async (req, res) => {
     //validate required fields
     let errorsArr = [];
@@ -38,7 +39,7 @@ let createNewCategory = async (req, res) => {
         return res.redirect("/category");
     }
 };
-
+//Export funciones
 module.exports = {
     getPageCategory: getPageCategory,
     createNewCategory: createNewCategory,

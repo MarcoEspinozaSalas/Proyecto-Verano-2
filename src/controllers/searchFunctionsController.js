@@ -1,8 +1,9 @@
+//Imports
 import { validationResult } from "express-validator";
 import { database } from "../configs/DBConnection";
 import searchFunctionsService from "../services/searchFunctionsService"
 import categoryService from "./../services/categoryService";
-
+//Render page search functions
 let getPageSearchFunctions = (req, res) => {
     extractUsers().then((val) => {
 
@@ -29,7 +30,7 @@ let getPageSearchFunctions = (req, res) => {
     })
 };
 
-
+//Extraer los usuarios
 let extractUsers= async (req, res) => {
     try {
         let a =  await searchFunctionsService.getUsers();
@@ -40,7 +41,7 @@ let extractUsers= async (req, res) => {
     }
 };
 
-
+//Extraer las funciones de los usuarios
 let extractFunctionsUsers= async (req, res) => {
     try {
         let a =  await searchFunctionsService.getfunctionsUsers();
@@ -50,7 +51,7 @@ let extractFunctionsUsers= async (req, res) => {
         req.flash("errors", err);
     }
 };
-
+//Extraer las id de las categorias
 let extractCategoriesbyId = async (req, res) => {
     try {
        let a =  await categoryService.extractCategoriesID();
@@ -61,7 +62,7 @@ let extractCategoriesbyId = async (req, res) => {
    
     }
 };
-
+//Extraer las categorias
 let extractCategories = async (req, res) => {
     try {
        let a =  await categoryService.extractCategories();
@@ -73,7 +74,7 @@ let extractCategories = async (req, res) => {
     }
 };
 
-
+//Export functions
 module.exports = {
     getPageSearchFunctions : getPageSearchFunctions,
     extractFunctionsUsers : extractFunctionsUsers

@@ -1,6 +1,7 @@
+//Imports
 import registerService from "./../services/registerService";
 import { validationResult } from "express-validator";
-
+//Rneder register page
 let getPageRegister = (req, res) => {
     return res.render("register.ejs", {
         errors: req.flash("errors"),
@@ -9,7 +10,7 @@ let getPageRegister = (req, res) => {
         categoriasID: ''
     });
 };
-
+//Crear nuevo usuario
 let createNewUser = async (req, res) => {
     //validate required fields
     let errorsArr = [];
@@ -38,6 +39,8 @@ let createNewUser = async (req, res) => {
         return res.redirect("/register");
     }
 };
+
+//Export functions
 module.exports = {
     getPageRegister: getPageRegister,
     createNewUser: createNewUser

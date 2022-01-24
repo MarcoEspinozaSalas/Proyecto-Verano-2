@@ -2,7 +2,7 @@ const sql = require('mssql');
 const conn = require('../configs/DBConnection');
 
 const routePool = new sql.ConnectionPool(conn);
-
+//Obtener usuarios
 let getUsers = () =>{
     return new Promise( async(resolve, reject)=>{
         routePool.connect().then(pool =>{
@@ -26,7 +26,7 @@ let getUsers = () =>{
 
     });
 };
-
+//Obtener funciones por id de usuario
 let getfunctionsUsersByID = (idFunction) =>{
     return new Promise( async(resolve, reject)=>{
         routePool.connect().then(pool =>{
@@ -49,7 +49,7 @@ let getfunctionsUsersByID = (idFunction) =>{
 
     });
 };
-
+//Obtener todas las funciones
 let getfunctionsUsers = () =>{
     return new Promise( async(resolve, reject)=>{
         routePool.connect().then(pool =>{
@@ -72,7 +72,7 @@ let getfunctionsUsers = () =>{
 
     });
 };
-
+//Export functions
 module.exports = {
     getUsers : getUsers,
     getfunctionsUsers: getfunctionsUsers,

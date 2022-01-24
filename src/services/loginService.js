@@ -2,7 +2,7 @@ const sql = require('mssql');
 const conn = require('../configs/DBConnection');
 const routePool = new sql.ConnectionPool(conn);
 import bcrypt from "bcryptjs";
-
+//HandleLogin
 let handleLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         //check email is exist or not
@@ -22,7 +22,7 @@ let handleLogin = (email, password) => {
     });
 };
 
-
+//Encontrar usuario por email
 let findUserByEmail = (email) => {
     return new Promise((resolve, reject) => {
         try {
@@ -44,7 +44,7 @@ let findUserByEmail = (email) => {
         }
     });
 };
-
+//Encontrar usuario por id
 let findUserById = (id) => {
     return new Promise((resolve, reject) => {
         try {
@@ -67,7 +67,7 @@ let findUserById = (id) => {
         }
     });
 };
-
+//Comparar contraseña
 let comparePassword = (password, userObject) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -83,7 +83,7 @@ let comparePassword = (password, userObject) => {
         }
     });
 };
-
+//Export functions
 module.exports = {
     handleLogin: handleLogin,
     findUserByEmail: findUserByEmail,

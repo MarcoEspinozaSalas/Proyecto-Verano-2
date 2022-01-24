@@ -1,9 +1,10 @@
+//Imports
 import passportLocal from "passport-local";
 import passport from "passport";
 import loginService from "../services/loginService";
-
+//Local passport
 let LocalStrategy = passportLocal.Strategy;
-
+//Iniciar el passport local
 let initPassportLocal = () => {
     passport.use(new LocalStrategy({
             usernameField: 'email',
@@ -34,10 +35,11 @@ let initPassportLocal = () => {
 
 };
 
+//Serializar
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
-
+//Deserealizar el usuario
 passport.deserializeUser((id, done) => {
     loginService.findUserById(id).then((user) => {
         return done(null, user);
@@ -45,5 +47,5 @@ passport.deserializeUser((id, done) => {
         return done(error, null)
     });
 });
-
+//Export passport
 module.exports = initPassportLocal;

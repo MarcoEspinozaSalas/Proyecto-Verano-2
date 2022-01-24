@@ -1,5 +1,5 @@
 import { check } from "express-validator";
-
+//Validar campos en el registro
 let validateRegister = [
     check("email", "Invalid email").isEmail().trim(),
 
@@ -11,14 +11,14 @@ let validateRegister = [
         return value === req.body.password
     })
 ];
-
+//Validar login
 let validateLogin = [
     check("email", "Invalid email").isEmail().trim(),
 
     check("password", "Invalid password")
     .not().isEmpty()
 ];
-
+//Export functions
 module.exports = {
     validateRegister: validateRegister,
     validateLogin: validateLogin

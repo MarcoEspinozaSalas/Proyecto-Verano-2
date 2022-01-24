@@ -1,6 +1,7 @@
+//Imports
 import { validationResult } from "express-validator";
 import loginService from "../services/loginService";
-
+//Render Login with params
 let getPageLogin = (req, res) => {
     return res.render("login.ejs", {
         errors: req.flash("errors"),
@@ -9,7 +10,7 @@ let getPageLogin = (req, res) => {
         categoriasID: ''
     });
 };
-
+//handleLogin 
 let handleLogin = async (req, res) => {
     let errorsArr = [];
     let validationErrors = validationResult(req);
@@ -30,27 +31,27 @@ let handleLogin = async (req, res) => {
         return res.redirect("/login");
     }
 };
-
+//Verificar si está logueado
 let checkLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
         return res.redirect("/login");
     }
     next();
 };
-
+//Logout
 let checkLoggedOut = (req, res, next) => {
     if (req.isAuthenticated()) {
         return res.redirect("/");
     }
     next();
 };
-
+//PostLogout
 let postLogOut = (req, res) => {
     req.session.destroy(function(err) {
         return res.redirect("/login");
     });
 };
-
+//Export functions
 module.exports = {
     getPageLogin: getPageLogin,
     handleLogin: handleLogin,

@@ -3,6 +3,7 @@ const conn = require('../configs/DBConnection');
 
 const routePool = new sql.ConnectionPool(conn);
 
+//Create new category
 let creatNewCategory = (data) =>{
         return new Promise( async(resolve, reject)=>{
             let categoryExist = await checkCategoryExist(data.nameCategory);
@@ -30,7 +31,7 @@ let creatNewCategory = (data) =>{
             }
         });
 };
-
+//Verificar si existe la categoria
 let checkCategoryExist = (nameCategory) => {
     return new Promise((resolve, reject)=>{
         try {
@@ -54,7 +55,7 @@ let checkCategoryExist = (nameCategory) => {
         }
     });
 };
-
+//Extraer la categoría
 let extractCategories = ()=>{
     return new Promise((resolve,reject)=>{
         try {
@@ -76,6 +77,7 @@ let extractCategories = ()=>{
         }
     })
 }
+//Extraer categoria id's
 let extractCategoriesID = ()=>{
     return new Promise((resolve,reject)=>{
         try {
@@ -97,7 +99,7 @@ let extractCategoriesID = ()=>{
         }
     })
 }
-
+//Export functions
 module.exports = {
     creatNewCategory : creatNewCategory,
     extractCategories: extractCategories,

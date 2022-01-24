@@ -1,7 +1,9 @@
+//Imports
 import functionsService from "./../services/functionsService";
 import { validationResult } from "express-validator";
-
 import categoryService from "./../services/categoryService";
+
+//Render page with variables
 let getPageFunctions = (req, res) =>{
    
     extractCategories().then(val1 =>{
@@ -20,6 +22,7 @@ let getPageFunctions = (req, res) =>{
     
 }
 
+//Create new functions
 let createNewFunction = async (req, res) => {
     //validate required fields
     let errorsArr = [];
@@ -56,7 +59,7 @@ let createNewFunction = async (req, res) => {
     }
 };
 
-
+//Extraer las categorías
 let extractCategories = async (req, res) => {
     try {
        let a =  await categoryService.extractCategories();
@@ -67,6 +70,8 @@ let extractCategories = async (req, res) => {
    
     }
 };
+
+//Extraer el id de las categorias
 let extractCategoriesbyId = async (req, res) => {
     try {
        let a =  await categoryService.extractCategoriesID();
@@ -77,7 +82,7 @@ let extractCategoriesbyId = async (req, res) => {
    
     }
 };
-
+//Exportar las funciones
 module.exports = {
     getPageFunctions : getPageFunctions,
     createNewFunction:createNewFunction,

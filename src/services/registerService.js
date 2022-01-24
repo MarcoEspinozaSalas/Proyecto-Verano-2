@@ -3,7 +3,7 @@ const conn = require('../configs/DBConnection');
 
 const routePool = new sql.ConnectionPool(conn);
 import bcrypt from "bcryptjs";
-
+//Create new user
 let createNewUser = (data) => {
     return new Promise(async (resolve, reject) => {
         // check email is exist or not
@@ -36,7 +36,7 @@ let createNewUser = (data) => {
         }
     });
 };
-
+//Verificar que el email no exista
 let checkExistEmail = (email) => {
     return new Promise( (resolve, reject) => {
         try {
@@ -61,7 +61,7 @@ let checkExistEmail = (email) => {
     });
 };
 
-
+//Export functions
 module.exports = {
     createNewUser: createNewUser
 };

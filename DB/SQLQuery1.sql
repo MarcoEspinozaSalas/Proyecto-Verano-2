@@ -1,7 +1,10 @@
+--Create DB
 create database proyecto2DB
 GO
 use proyecto2DB
 GO
+
+--Create table users
 create table users
 (
     id int IDENTITY(1,1) primary key,
@@ -11,12 +14,14 @@ create table users
 );
 GO
 
-
+--Create table category
 CREATE TABLE category (
     idCategory int IDENTITY(1,1) primary key ,
 	nameCategory varchar(20) not null
 );
 go
+
+--Create table functions
 CREATE TABLE functions(
 	idFunction int IDENTITY(1,1) primary key,
 	name varchar(100) not null,
@@ -26,10 +31,3 @@ CREATE TABLE functions(
 	idCategory int FOREIGN KEY REFERENCES category(idCategory)
 );
 go
-select * from users
-
-SELECT * FROM users WHERE email = 'test@test'
-
-insert into users values('test','test@test.com','1234');
-
-DROP table users

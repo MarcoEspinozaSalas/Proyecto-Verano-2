@@ -2,7 +2,7 @@ const sql = require('mssql');
 const conn = require('../configs/DBConnection');
 
 const routePool = new sql.ConnectionPool(conn);
-
+//Create new Functions
 let creatNewFunction = (data) =>{
     return new Promise( async(resolve, reject)=>{
         let newName = await checkfunctionName(data.code);
@@ -35,7 +35,7 @@ let creatNewFunction = (data) =>{
         
     });
 };
-
+//Verificar el nombre
 let checkfunctionName = (name) => {
     return new Promise((resolve, reject)=>{
         try {
@@ -52,7 +52,7 @@ let checkfunctionName = (name) => {
         }
     });
 };
-
+//Verificar que el código esté sin errores
 let checkfunctionCode= (code) => {
     return new Promise((resolve, reject)=>{
         try {
@@ -65,11 +65,7 @@ let checkfunctionCode= (code) => {
     });
 };
 
-
-
-
-
-
+//Export functions
 module.exports = {
     creatNewFunction : creatNewFunction
 }

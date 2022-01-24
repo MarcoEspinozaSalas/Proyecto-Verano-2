@@ -1,7 +1,8 @@
+//Clase importadora para que se pueda utilizar las funciones de la DB
 class importadorClass {
-
+    //Objeto que tiene las funciones
     jsonFunctions = {};
-
+    //Importador
     importador = async(...params) =>{
 
         let auxList = [];
@@ -11,7 +12,7 @@ class importadorClass {
         });
 
         for (let index = 0; index < auxList.length; index++) {
-          
+            //Utiliza la promesa para esperar la consulta del servidor
             await this.getFunctions(auxList[index].id).then((result) => {
 
                 let auxFunction = new Function (`return ${result}`)();
@@ -26,7 +27,7 @@ class importadorClass {
 
     }
 
-
+    //Obtiene la función solicitada y la devuelve en promesa
     getFunctions = (idFunction) => {
 
         let myPromise = new Promise(function(myResolve,myReject) 
@@ -45,5 +46,5 @@ class importadorClass {
     }
 
 }
-
+//Export de la clase
 export default importadorClass;

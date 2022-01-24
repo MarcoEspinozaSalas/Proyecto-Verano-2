@@ -1,3 +1,5 @@
+
+//Render de homepage
 let handleHelloWorld = async (req, res) => {
     return res.render("homepage.ejs",{
         user: req.user,
@@ -5,7 +7,7 @@ let handleHelloWorld = async (req, res) => {
         categoriasID: ''
     });
 };
-
+//Exportar el render
 module.exports = {
     handleHelloWorld: handleHelloWorld,
 };
