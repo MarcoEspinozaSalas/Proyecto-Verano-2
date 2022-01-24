@@ -1,38 +1,41 @@
-export class importadorClass {
+class importadorClass {
 
     jsonFunctions = {};
 
-    importar(...params){
+    importador = async(...params) =>{
 
-        let aux = [];
+        let auxList = [];
 
         Object.keys(params[0]).forEach( (key) =>{
-            aux.push({id: params[0][key], name: key})
-            console.log({id: params[0][key], name: key});
+            auxList.push({id: params[0][key], name: key})
         });
 
-        // for (let index = 0; index < aux.length; index++) {
+        for (let index = 0; index < auxList.length; index++) {
           
-        //     this.getFunctions(aux[index].id).then((result) => {
-        //         return this.jsonFunctions;
-        //     })
+            await this.getFunctions(auxList[index].id).then((result) => {
+
+                let auxFunction = new Function (`return ${result}`)();
+                
+                this.jsonFunctions[auxList[index].name] = auxFunction;
+
+            });
             
-        // }
+        }
+
+        return this.jsonFunctions;
 
     }
 
 
     getFunctions = (idFunction) => {
+
         let myPromise = new Promise(function(myResolve,myReject) 
         {
             const xhr = new XMLHttpRequest();
             xhr.addEventListener("readystatechange", () => {
                 if (xhr.readyState === 4 && xhr.status === 200){
                     let result=eval('('+xhr.responseText+')');
-                    new Function (`return ${result[0].code}`)
-                    myResolve(true);
-                }else{
-                    myReject(false);
+                    myResolve(result[0].code);
                 }
             });
             xhr.open("GET", `http://localhost:3000/exportFunctions?idFunction=${idFunction}`);
@@ -42,3 +45,5 @@ export class importadorClass {
     }
 
 }
+
+export default importadorClass;
