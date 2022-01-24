@@ -55,7 +55,9 @@ let initWebRoutes = (app) => {
             return next(err);
         });;
     });
-    router.post("/functions");
+    
+    router.post("/functions", loginController.checkLoggedIn,functionsController.createNewFunction);
+
 
     router.get("/searchFunctions", loginController.checkLoggedIn, searchFunctionController.getPageSearchFunctions);
 

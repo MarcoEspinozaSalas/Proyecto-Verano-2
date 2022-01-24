@@ -15,9 +15,11 @@
             } = new importadorClass();
 
 
-            const inst = await importador({"testSuma": 1});
+            const inst = await importador({"testSuma": 1, "funcParam": 13});
 
             console.log(inst.testSuma());
+
+            console.log(inst.funcParam(40));
         </script>
     </head>
     <body>
