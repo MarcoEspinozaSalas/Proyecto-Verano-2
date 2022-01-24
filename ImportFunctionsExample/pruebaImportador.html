@@ -15,14 +15,16 @@
             } = new importadorClass();
 
 
-            const inst = await importador({"testSuma": 1, "funcParam": 13});
+            const inst = await importador({"testSuma": 1, "funcParam": 13, "testVi": 14});
 
             console.log(inst.testSuma());
 
-            console.log(inst.funcParam(40));
+            console.log(inst.funcParam(70));
+
+            console.log(inst.testVi());
         </script>
     </head>
     <body>
-        <h1>Holaa</h1>
+        <h1>Example Import Functions</h1>
     </body>
 </html>

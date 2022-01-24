@@ -11,22 +11,22 @@
         <div class="container" id="container">
             <div class="form-container sign-in-container">
                 <form method="GET" action="/showCode">
-                    <h1>Buscar Funciones</h1>
+                    <h1>Search Functions</h1>
                     <br>
                     <br>
                     <div style="gap: 10px; display: flex;">
-                        <label for="option">Nombre Usuario</label>
+                        <label for="option">Username</label>
                         <input type="radio" id="nameUser" name="option" value="nombreUsuario">
-                        <label for="option">Nombre Funcion</label>
+                        <label for="option">Function name</label>
                         <input type="radio" id="nameFunc" name="option" value="nombreFuncion">
-                        <label for="option">Categoría</label>
+                        <label for="option">Category</label>
                         <input type="radio" id="category" name="option" value="categoria">
                     </div>
                     <br>
                     <br>
                     <div id="divNames" style="display:none;">
                         <label for="names">
-                            Lista de usuarios</label>
+                            Users List</label>
                         <select name="names" id="names" onchange="getSelectNames(this)">
                             <% if(users.length != 0 ) { %>
                                 <% for (let x = 0; x < users.length; x++) { %>
@@ -59,7 +59,7 @@
                     <br>
 
 
-                    <button type="submit">Buscar</button>
+                    <button type="submit">Search</button>
                     <br>
                     <a href="/">Home Page</a>
                 </form>
@@ -106,7 +106,7 @@
             divFunctions.style = "display: "
 
             let codigoHTMLFunctions = `
-                <label for="functions">Lista de Funciones</label>
+                <label for="functions">Functions List</label>
                 <select name="functions" id="functions">
                     <% if(functions.length != 0 ) { %>
                         <% for (let x = 0; x < functions.length; x++) { %>
@@ -146,7 +146,7 @@
             divFunctionsName.style = "display: "
 
             let codigoHTMLFunctions = `
-                <label for="functions">Lista de Funciones</label>
+                <label for="functions">Functions List</label>
                 <select name="functions2" id="functions2">
                     <% if(functions.length != 0 ) { %>
                         <% for (let x = 0; x < functions.length; x++) { %>
@@ -180,7 +180,7 @@
             divFunctionsCategory2.style = "display: "
 
             let codigoHTMLFunctions = `
-                <label for="functions">Lista de Funciones</label>
+                <label for="functions">Functions List</label>
                 <select name="functions3" id="functions3">
                     <% if(functions.length != 0 ) { %>
                         <% for (let x = 0; x < functions.length; x++) { %>
