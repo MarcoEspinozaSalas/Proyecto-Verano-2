@@ -13,7 +13,7 @@ let creatNewFunction = (data) =>{
             let functions = {
                 name: newName,
                 description: data.description,
-                code: data.code,
+                code: (data.code).replace(/'/g, '&#39;').replace(/"/g, '&#34;'),
                 idUser: data.idUser,
                 idCategory: data.idCategory
             };

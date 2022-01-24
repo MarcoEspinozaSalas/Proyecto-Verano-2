@@ -33,7 +33,7 @@ let createNewFunction = async (req, res) => {
         return res.redirect("/functions");
     }
 
-    //create a new user
+    //create a new function
     let newFunction = {
         name: req.body.name,
         description: req.body.description,
@@ -42,9 +42,14 @@ let createNewFunction = async (req, res) => {
         idCategory: req.body.idCategory
     };
     try {
-        await functionsService.creatNewFunction(newFunction);
-        req.flash("results", "Create a new function successful");
-        return res.redirect("/functions");
+        if (req.body.idCategory === 'Categories...') {
+            req.flash("errors", "Please fill out category");
+            return res.redirect("/functions");
+        }else{
+            await functionsService.creatNewFunction(newFunction);
+            req.flash("results", "Create a new function successful");
+            return res.redirect("/functions");
+        }
     } catch (err) {
         req.flash("errors", err);
         return res.redirect("/functions");

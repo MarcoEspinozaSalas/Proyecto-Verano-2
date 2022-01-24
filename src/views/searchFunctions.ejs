@@ -111,7 +111,7 @@
                     <% if(functions.length != 0 ) { %>
                         <% for (let x = 0; x < functions.length; x++) { %>
                             <option hidden>functios...</option>
-                            <option id="<%- functions[x].idUser%>"  class="optionFunc" value='<%- functions[x].code %>'><%- functions[x].description %></option>
+                            <option id="<%- functions[x].idUser%>"  class="optionFunc" value='<%- functions[x].code %>'> <%- functions[x].name %> - <%- functions[x].description %> </option>
                         <% } %>
                     <% } %>
                 </select>
@@ -151,7 +151,7 @@
                     <% if(functions.length != 0 ) { %>
                         <% for (let x = 0; x < functions.length; x++) { %>
                             <option hidden>functios...</option>
-                            <option id="<%- functions[x].idUser%>"  class="optionFunc" value='<%- functions[x].code %>'><%- functions[x].description %></option>
+                            <option id="<%- functions[x].idUser%>"  class="optionFunc" value='<%- functions[x].code %>'><%- functions[x].name %></option>
                         <% } %>
                     <% } %>
                 </select>
@@ -185,7 +185,7 @@
                     <% if(functions.length != 0 ) { %>
                         <% for (let x = 0; x < functions.length; x++) { %>
                             <option hidden>functios...</option>
-                            <option id="<%- functions[x].idCategory%>"  class="optionFuncCategory" value='<%- functions[x].code %>'><%- functions[x].description %></option>
+                            <option id="<%- functions[x].idCategory%>"  class="optionFuncCategory" value='<%- functions[x].code %>'><%- functions[x].name %> - <%- functions[x].description %></option>
                         <% } %>
                     <% } %>
                 </select>

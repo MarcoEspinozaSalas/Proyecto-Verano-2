@@ -8,6 +8,7 @@ import initPassportLocal from "../controllers/passportLocalController";
 import categoryController from "../controllers/categoryController";
 import functionsController from "../controllers/functionsController";
 import searchFunctionController from "../controllers/searchFunctionsController"
+import searchFunctionsService from "../services/searchFunctionsService"
 const axios = require('axios');
 
 // Init all passport
@@ -41,8 +42,14 @@ let initWebRoutes = (app) => {
     
     //Functions
     router.get("/functions", loginController.checkLoggedIn, functionsController.getPageFunctions);
-   // router.get("/functions2", loginController.checkLoggedIn, functionsController.extractCategories);
-    router.post("/functions", loginController.checkLoggedIn,functionsController.createNewFunction);
+    router.get("/exportFunctions", function (req, res, next) {
+        searchFunctionsService.getfunctionsUsers().then((result) => {
+            return res.status(200).json(result);
+        }).catch((err) => {
+            return next(err);
+        });;
+    });
+    router.post("/functions");
 
     router.get("/searchFunctions", loginController.checkLoggedIn, searchFunctionController.getPageSearchFunctions);
 
@@ -53,7 +60,7 @@ let initWebRoutes = (app) => {
     router.get("/showCode", function (req, res, next) {
 
         if (req.query.functions != undefined && req.query.functions != 'functios...') {
-            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions } })
+            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions, lexer: 'javascript' } })
             .then((result) => {
                 return res.render("showCode.ejs", {
                     code: result.data
@@ -63,7 +70,7 @@ let initWebRoutes = (app) => {
                 console.log(err);
             });
         }else if (req.query.functions2 != undefined && req.query.functions2 != 'functios...') {
-            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions2 } })
+            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions2, lexer: 'javascript' } })
             .then((result) => {
                 return res.render("showCode.ejs", {
                     code: result.data
@@ -73,7 +80,7 @@ let initWebRoutes = (app) => {
                 console.log(err);
             });
         }else if (req.query.functions3 != undefined && req.query.functions3 != 'functios...') {
-            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions3 } })
+            axios.get(`http://hilite.me/api`,{ params: { code: req.query.functions3, lexer: 'javascript' } })
             .then((result) => {
                 return res.render("showCode.ejs", {
                     code: result.data

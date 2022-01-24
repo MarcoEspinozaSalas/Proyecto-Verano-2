@@ -15,12 +15,12 @@
                     <br>
                     <br>
                     <input type="text" id="description" name="description" placeholder="Descripcion" required>
-                    <textarea id="code" name="code" rows="4" cols="50"></textarea>
-                    <p>Tip: No utilice comillas simples (') en su código</p>
+                    <textarea id="code" name="code" rows="4" cols="50" required></textarea>
+                    <!-- <p>Tip: No utilice comillas simples (') en su código</p> -->
                     <br>
                     <input type="text" class="form-control" name="idUser" id="idUser" value="<%= user.id%>" hidden>
                     <label for="idCategory">Choose a category:</label>
-                    <select name="idCategory" id="idCategory">
+                    <select name="idCategory" id="idCategory" required>
 
                         <% if(categoriasName.length != 0 ) { %>
                             <% for (let x = 0; x < categoriasName.length; x++) { %>
