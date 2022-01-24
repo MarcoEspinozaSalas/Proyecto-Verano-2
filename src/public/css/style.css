@@ -1,18 +1,27 @@
-.red {
-    border: 1px solid red;
+.container {
+    position: fixed;
+    left: 50%;
+    top: 35%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    max-width: 850px !important;
 }
 
-.green {
-    border: 1px solid green;
+.title {
+    padding: 10px;
+    background-color: rgb(84, 154, 245);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(156, 156, 156);
 }
 
-.login-left {
-    background-image: url("../images/background.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
-    opacity: 0.9;
-    height: 600px;
-    border-radius: 3px;
+.botones {
+    padding: 90px;
+    text-align: center;
+    display: flex; 
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(156, 156, 156);
 }
